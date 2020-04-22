@@ -1,5 +1,7 @@
 package com.example.demo.modules.test.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,12 @@ import com.example.demo.modules.test.vo.ConfigBean;
 @RestController
 @RequestMapping("/api/Controller")
 public class TestController {
+	
+	//引入log
+	private final static Logger LOGGER = LoggerFactory.getLogger(TestController.class);
+	
+	
+	
 	//这是用全局配置文件 测试
 	//通过value这个注解的方式将值传递过来
 	@Value("${server.port}")
@@ -30,6 +38,15 @@ public class TestController {
 	@Autowired
 	private ConfigBean configBean;
 	
+	@RequestMapping("/log")
+	public String logTest(){
+		LOGGER.trace("this is TRACE");
+		LOGGER.debug("this is DEBUG");
+		LOGGER.info("this is INFO");
+		LOGGER.warn("this is WARN");
+		LOGGER.error("this is ERROR log.");
+		return "this is log test";
+	}
 
 	@RequestMapping("/config")
 	@ResponseBody
