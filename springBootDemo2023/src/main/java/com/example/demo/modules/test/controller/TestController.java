@@ -49,7 +49,6 @@ public class TestController {
 	}
 
 	@RequestMapping("/config")
-	@ResponseBody
 	public String configTest(){
 		StringBuffer sb = new StringBuffer();
 		sb.append(port).append("------")
