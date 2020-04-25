@@ -54,6 +54,35 @@ public class CityServiceImpl implements CityService {
 	}
 
 	
+	@Override
+	public Result<City> updateCity(City city) {
+		Result<City> result = new Result<>(ResultEnum.SUCCESS.status,"insert success!!!!");
+		try {
+			cityDao.updateCity(city);
+			result.setObjiect(city);
+		} catch (Exception e) {
+			result.setStatus(ResultEnum.FAILD.status);
+			result.setMessage(e.getMessage());//获取错误异常进行抛出行为
+		}
+		return result;
+	}
 	
+	
+	@Override
+	public Result<Object> deleteCity(int cityId) {
+		Result<Object> result = new Result<>(ResultEnum.SUCCESS.status,"insert success!!!!");
+		try {
+			cityDao.deleteCity(cityId);
+		} catch (Exception e) {
+			result.setStatus(ResultEnum.FAILD.status);
+			result.setMessage(e.getMessage());//获取错误异常进行抛出行为
+		}
+		return result;
+	}
+
+	@Override
+	public City getCitiesByCityIdAndCityName(String cityId, String CityName) {
+		return cityDao.getCitiesByCityIdAndCityName(cityId,CityName);
+	}
 	
 }
