@@ -20,6 +20,7 @@ public class Country {
 	private String countryCode2;
 	private String continent;
 	private String region;
+	
 	private float surfaceArea;
 	private int indepYear;
 	private int population;
