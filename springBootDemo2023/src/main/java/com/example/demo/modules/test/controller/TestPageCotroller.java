@@ -42,7 +42,8 @@ public class TestPageCotroller {
 		modelMap.addAttribute("city", city);
 		modelMap.addAttribute("cities", cities);
 		modelMap.addAttribute("updateCityUri", "/api/city");
-		modelMap.addAttribute("template", "test/index");
+//		modelMap.addAttribute("template", "test/index");
 		return "index";
 	}
 }
+

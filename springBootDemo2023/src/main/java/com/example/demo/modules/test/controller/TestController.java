@@ -1,11 +1,14 @@
 package com.example.demo.modules.test.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,7 +69,8 @@ public class TestController {
 	@RequestMapping("/appDoesc")
 	//@ResponseBody的作用是讲该方法变成接口与controller一样
 	@ResponseBody
-	public String getDoesc(){
-		return "Holle word, this is spring boot demo.";
+	public String getDoesc(HttpServletRequest request ,@RequestParam String key ){
+		String value = request.getParameter("key");
+		return "Holle word, this is spring boot demo."+value+key;
 	}
 }

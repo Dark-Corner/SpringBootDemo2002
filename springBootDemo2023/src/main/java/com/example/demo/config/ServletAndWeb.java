@@ -10,6 +10,10 @@ import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/*
+ * 注册一个连接器
+ * */
+	
 @Configuration
 @AutoConfigureAfter({WebMvcAutoConfiguration.class})
 public class ServletAndWeb {
@@ -21,9 +25,7 @@ public class ServletAndWeb {
 	public Connector connector(){
 			Connector connector = new Connector();
 			connector.setScheme("http");
-			connector.setPort(80);
-			
-			
+			connector.setPort(80);	
 			return connector;
 	}
 	
