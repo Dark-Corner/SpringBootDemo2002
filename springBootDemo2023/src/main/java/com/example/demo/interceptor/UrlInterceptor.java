@@ -38,11 +38,11 @@ public class UrlInterceptor implements HandlerInterceptor {
 		String uri = request.getServletPath();
 		String template = (String) modelAndView.getModelMap().get("template");
 		
-		if(StringUtils.isNoneBlank(template)){
+		if(StringUtils.isBlank(template)){
 			if(uri.startsWith("/")){
 				uri = uri.substring(1);
 			}
-			modelAndView.getModelMap().put("template", uri);
+			modelAndView.getModelMap().addAttribute("template", uri);
 		}
 		
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
