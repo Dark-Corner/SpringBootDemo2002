@@ -56,7 +56,7 @@ public class TestPageCotroller {
 				String destFilePath = "D:\\load\\"+fileName;
 				//在目标文件创建一个空的完后再通过file将数据以流的方式替换掉
 				File destFile = new File(destFilePath);	
-				file.transferTo(destFile);
+				file.transferTo(destFile);  
 				
 				
 				isEmpty = false;
@@ -136,7 +136,7 @@ public class TestPageCotroller {
 		modelMap.addAttribute("city", city);
 		modelMap.addAttribute("cities", cities);
 		modelMap.addAttribute("updateCityUri", "/api/city");
-		modelMap.addAttribute("template", "test/index");
+		//modelMap.addAttribute("template", "test/index");
 		return "index";
 	}
 }

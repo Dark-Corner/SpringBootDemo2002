@@ -50,17 +50,24 @@
 	<div class="container body">
 		<div class="main_container">
 			<!-- header	 -->
-			<div th:replace="fragments/header :: header"></div>
+			<div th:replace="fragments/header"></div>
 
 			<!-- body -->
-			<div class='mainBody' style="margin-top: 20px;">
-				<div th:if="${template}">
-					<div th:replace="${template}"></div>
+			<div class="right_col" role="main">
+				<div class="">
+					<div th:replace="fragments/sidbar"></div>
+								
+					<!-- page content -->			       
+						<div class='mainBody' style="margin-top: 20px;">
+							<div th:if="${template}">
+								<div th:replace="${template}"></div>
+							</div>
+						</div>					
 				</div>
 			</div>
-
+		
 			<!-- footer -->
-			<div th:replace="fragments/footer :: footer"></div>
+			<div th:replace="fragments/footer"></div>
 		</div>
 	</div>
 	
@@ -102,7 +109,7 @@
 	<script
 		th:src="${'/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js'}"></script>
 	<!-- bootstrap-daterangepicker -->
-	<script th:src="${'/vendors/moment/min/moment.min.js"></script>
+	<script th:src="${'/vendors/moment/min/moment.min.js'}"></script>
 	<script
 		th:src="${'/vendors/bootstrap-daterangepicker/daterangepicker.js'}"></script>
 
