@@ -45,10 +45,10 @@ public class Result<T> {
 
 
 
-	public enum ResultEnum{
+	public enum ResultStatus{
 		SUCCESS(200),FAILD(500);
 		public int status;
-		private ResultEnum(int status){
+		private ResultStatus(int status){
 			this.status= status;
 		}
 	}

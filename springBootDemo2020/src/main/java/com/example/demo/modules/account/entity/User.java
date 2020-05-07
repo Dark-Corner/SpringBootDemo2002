@@ -24,6 +24,7 @@ public class User {
 	private int userId;
 	private String userName;
 	private String password;
+	private String email;
 	private Date createDate;
 	
 	@Transient
@@ -58,10 +59,19 @@ public class User {
 	public Date getCreateDate() {
 		return createDate;
 	}
-
+	
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 	public boolean isRememberMe() {
 		return rememberMe;

@@ -1,0 +1,49 @@
+<!-- Ä£Ì¬¿ò£¨Modal£© -->
+<div th:fragment="userAdd" class="modal fade" id="userAddModal" tabindex="-1"
+	role="dialog" aria-labelledby="userAddLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="userAddLabel"
+					style="font-size: 18px; font-weight: 500;">User Add</h4>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+					<div class="form-group row">
+						<label class="control-label col-md-3">User Name</label>
+						<div class="col-md-8">
+							<input id="userNameForAddPage" name="userName" class="form-control" 
+								type="text" placeholder="Enter user name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3">Password</label>
+						<div class="col-md-8">
+							<input id="passwordForAddPage" name="password" class="form-control" 
+								type="password" placeholder="Enter user name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3">Email</label>
+						<div class="col-md-8" id="rolesForUserAdd">
+							<input id="emailForAddPage" name="email" class="form-control" 
+								type="text" placeholder="Enter user name">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<!-- data-dismiss="modal"¹Ø±ÕÄ£Ì¬¿ò -->
+				<a class="reset_pass" href="#" data-dismiss="modal">
+					Cancel
+				</a>
+				<button id="userAddBtn" data-dismiss="modal" 
+					class="btn btn-default" type="button">
+					Submit
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.modules.common.vo.Result;
-import com.example.demo.modules.common.vo.Result.ResultEnum;
+import com.example.demo.modules.common.vo.Result.ResultStatus;
 import com.example.demo.modules.test.dao.CityDao;
 import com.example.demo.modules.test.entity.City;
 import com.example.demo.modules.test.service.CityService;
@@ -42,12 +42,12 @@ public class CityServiceImpl implements CityService {
 
 	@Override
 	public Result<City> insertCity(City city) {
-		Result<City> result = new Result<>(ResultEnum.SUCCESS.status,"insert success!!!!");
+		Result<City> result = new Result<>(ResultStatus.SUCCESS.status,"insert success!!!!");
 		try {
 			cityDao.insertCity(city);
 			result.setObjiect(city);
 		} catch (Exception e) {
-			result.setStatus(ResultEnum.FAILD.status);
+			result.setStatus(ResultStatus.FAILD.status);
 			result.setMessage(e.getMessage());//获取错误异常进行抛出行为
 		}
 		return result;
@@ -56,12 +56,12 @@ public class CityServiceImpl implements CityService {
 	
 	@Override
 	public Result<City> updateCity(City city) {
-		Result<City> result = new Result<>(ResultEnum.SUCCESS.status,"insert success!!!!");
+		Result<City> result = new Result<>(ResultStatus.SUCCESS.status,"insert success!!!!");
 		try {
 			cityDao.updateCity(city);
 			result.setObjiect(city);
 		} catch (Exception e) {
-			result.setStatus(ResultEnum.FAILD.status);
+			result.setStatus(ResultStatus.FAILD.status);
 			result.setMessage(e.getMessage());//获取错误异常进行抛出行为
 		}
 		return result;
@@ -70,11 +70,11 @@ public class CityServiceImpl implements CityService {
 	
 	@Override
 	public Result<Object> deleteCity(int cityId) {
-		Result<Object> result = new Result<>(ResultEnum.SUCCESS.status,"insert success!!!!");
+		Result<Object> result = new Result<>(ResultStatus.SUCCESS.status,"insert success!!!!");
 		try {
 			cityDao.deleteCity(cityId);
 		} catch (Exception e) {
-			result.setStatus(ResultEnum.FAILD.status);
+			result.setStatus(ResultStatus.FAILD.status);
 			result.setMessage(e.getMessage());//获取错误异常进行抛出行为
 		}
 		return result;

@@ -1,0 +1,178 @@
+<div>
+	<a class="hiddenanchor" id="signup"></a> <a class="hiddenanchor"
+		id="signin"></a>
+
+	<div class="login_wrapper">
+		<div class="animate form login_form">
+			<section class="login_content">
+				<form action="javascript:void(0)" method="post">
+					<h1>Login Form</h1>
+					<div>
+						<input name="user.Name" type="text" class="form-control" placeholder="Username" />
+					</div>
+					<div>
+						<input name="pass.word" type="password" class="form-control" placeholder="Password"/>
+					</div>
+					<div>
+						<button name="loginBtn" class="btn btn-default submit" >Log in</button> <a
+							class="reset_pass" href="#">Lost your password?</a>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="separator">
+						<p class="change_link">
+							New to site? <a href="#signup" class="to_register"> Create
+								Account </a>
+						</p>
+
+						<div class="clearfix"></div>
+						<br />
+
+						<div>
+							<h1>
+								<i class="fa fa-paw"></i> Gentelella Alela!
+							</h1>
+							<p>©2016 All Rights Reserved. Gentelella Alela! is a
+								Bootstrap 3 template. Privacy and Terms</p>
+						</div>
+					</div>
+				</form>
+			</section>
+		</div>
+
+		<div id="register" class="animate form registration_form">
+			<section class="login_content">
+				<form action="javascript:void(0)" method="post">
+					<h1>Create Account</h1>
+					<div>
+						<input name="userName" type="text" class="form-control" placeholder="Username"/>
+					</div>
+					<div>
+						<input name="password" type="password" class="form-control" placeholder="Password"/>
+					</div>
+					<div>
+						<input name="email" type="email" class="form-control" placeholder="Email"/>
+					</div>
+					<div>
+						<button name="registerBtn" class="btn btn-default submit" >Submit</button>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="separator">
+						<p class="change_link">
+							Already a member ? <a href="#signin" class="to_register"> Log
+								in </a>
+						</p>
+
+						<div class="clearfix"></div>
+						<br />
+
+						<div>
+							<h1>
+								<i class="fa fa-paw"></i> Gentelella Alela!
+							</h1>
+							<p>©2016 All Rights Reserved. Gentelella Alela! is a
+								Bootstrap 3 template. Privacy and Terms</p>
+						</div>
+					</div>
+				</form>
+			</section>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+//加载页面就需要执行的js代码块
+$(document).ready(function() {
+	$("[name='loginBtn']").bind("click",function(){
+		/*下面定义的函数  */
+		login();
+	})
+});	
+
+
+function login(){
+	/* if(!$('id样式名').prop('他的一个属性')){ ------ 表示如果这个样式没有这个属性就弹出一颗提示框内容为Please check this terms
+		layer.msg("Please check this terms",{icon:0});
+		return;
+	} */
+	var user = {};
+	/*要与entity里的一致 后面$()里填的是属性 
+		将页面上对应属性的值以键对值方式存进定义的user里
+	*/
+	user.userName = $("[name='user.Name']").val();
+	user.password = $("[name='pass.word']").val();
+
+	
+	$.ajax({
+		/*将数据传到这个映射路径 */
+		url : "/api/login",
+		type : "post",
+		contentType : "application/json",
+		/*将js对象转化为josn格式  */
+		data : JSON.stringify(user),
+		/* 如果成功就跳转到 common/dashboad页面否则就返回报错信息*/
+		success : function(data){
+			 	if(data.status ==  200){
+			 		location.href="/test/index";
+			 	}else{
+			 		layer.msg(data.message,{icon : 0});
+			 	}
+		},
+		/* 弹出页面异常 */
+		error : function(data){
+			layer.msg(data.responseText,{icon : 0});
+		}
+	});
+}
+
+
+/* ###########################register#################################### */
+/* 在页面加载初始就运行完
+	样式属性为name='registerBtn'的设置点击事件
+*/
+jQuery(function($){
+	$("[name='registerBtn']").bind("click",function(){
+		/*下面定义的函数  */
+		register();
+	})
+})
+function register(){
+	/* if(!$('id样式名').prop('他的一个属性')){ ------ 表示如果这个样式没有这个属性就弹出一颗提示框内容为Please check this terms
+		layer.msg("Please check this terms",{icon:0});
+		return;
+	} */
+	var user = {};
+	/*要与entity里的一致 后面$()里填的是属性 
+		将页面上对应属性的值以键对值方式存进定义的user里
+	*/
+	user.userName = $("[name='userName']").val();
+	user.password = $("[name='password']").val();
+	user.email = $("[name='email']").val();
+	
+	$.ajax({
+		/*将数据传到这个映射路径 */
+		url : "/api/register",
+		type : "post",
+		contentType : "application/json",
+		/*将js对象转化为josn格式  */
+		data : JSON.stringify(user),
+		/* 如果成功就跳转到 common/dashboad页面否则就返回报错信息*/
+		success : function(data){
+			 	if(data.status ==  200){
+			 		location.href="/common/dashboad";
+			 	}else{
+			 		layer.msg(data.message,{icon : 0});
+			 	}
+		},
+		/* 弹出页面异常 */
+		error : function(data){
+			layer.msg(data.responseText,{icon : 0});
+		}
+	});
+}
+
+
+</script>
