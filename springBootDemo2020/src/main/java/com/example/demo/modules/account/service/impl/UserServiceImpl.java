@@ -118,7 +118,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(int userId) {
-		return userDao.getUserById(userId);
+		User userById = userDao.getUserById(userId);
+		userById.setPassword(MD5Util.getMD5(MD5Util.getMD5(userById.getPassword())));
+		return userById;
 	}
 
 	@Override
@@ -130,6 +132,7 @@ public class UserServiceImpl implements UserService {
 			return new Result<User>(ResultStatus.FAILD.status, "User name is repeat.");
 		}
 		
+		user.setPassword(MD5Util.getMD5(user.getPassword()));
 		userDao.updateUser(user);
 		List<Role> roles = user.getRoles();
 		if (!roles.isEmpty()) {

@@ -52,12 +52,13 @@ public interface UserDao {
 			@Result(column="user_id", property="userId"),
 			@Result(column="user_id",property="roles",
 					javaType=List.class,
-					many=@Many(select="com.thornBird.sbd.modules.account.dao."
+					many=@Many(select="com.example.demo.modules.account.dao."
 							+ "RoleDao.getRolesByUserId"))
 		})
 	User getUserById(int userId);
-	
-	@Update("update user set user_name=#{userName} where user_id=#{userId}")
+
+//	,password=#{password},email=#{email}
+	@Update("update user set user_name=#{userName},password=#{password},email=#{email} where user_id=#{userId}")
 	void updateUser(User user);
 	
 	@Select("delete from user where user_id=#{userId}")

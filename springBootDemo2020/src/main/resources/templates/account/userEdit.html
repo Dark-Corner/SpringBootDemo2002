@@ -1,4 +1,4 @@
-<!-- Ä£Ì¬¿ò£¨Modal£© -->
+<!-- æ¨¡æ€æ¡†ï¼ˆModalï¼‰ -->
 <div th:fragment="userEdit" class="modal fade" id="userEditModal" tabindex="-1"
 	role="dialog" aria-labelledby="userEditLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -11,6 +11,7 @@
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal">
+						<input id="userIdForEditPage" name="userId" type="hidden">
 					<div class="form-group row">
 						<label class="control-label col-md-3">User Name</label>
 						<div class="col-md-8">
@@ -18,12 +19,30 @@
 								type="text" placeholder="Enter user name">
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3">Password</label>
+						<div class="col-md-8">
+							<input id="userPassForEditPage" name="password" class="form-control" 
+								type="text" placeholder="Enter user name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3">Email</label>
+						<div class="col-md-8">
+							<input id="userEmailForEditPage" name="email" class="form-control" 
+								type="text" placeholder="Enter user name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3">Roles</label>
+						<div class="col-md-8" id="rolesForEditPage"></div>
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<!-- data-dismiss="modal"¹Ø±ÕÄ£Ì¬¿ò -->
-				<a class="btn btn-secondary" href="#" data-dismiss="modal">
-					<i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel
+				<!-- data-dismiss="modal"å…³é—­æ¨¡æ€æ¡† -->
+				<a class="reset_pass" href="#" data-dismiss="modal">
+					Cancel
 				</a>
 				<button id="userEditBtn" data-dismiss="modal" 
 					class="btn btn-primary" type="button">

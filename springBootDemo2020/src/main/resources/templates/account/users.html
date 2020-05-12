@@ -54,34 +54,55 @@
 
 <script type="text/javascript">
 jQuery(function($){
-	initTable(DEFAULT_CURRENT_PAGE, DEFAULT_PAGE_SIZE);
-/* 	 $("#btnAdd").bind("click", function(){
+	 initTable(DEFAULT_CURRENT_PAGE, DEFAULT_PAGE_SIZE);
+	 $("#userEditModal").bind("click", function(){
 		initAddModal();
-	}) */
+	})  
 	$("#userAddBtn").bind("click", function(){
 		insertUser();
 	})
-	/*$("#userEditBtn").bind("click", function(){
+	$("#userEditBtn").bind("click", function(){
 		updateUser();
-	}) */
+		
+	}) 
 });
 
-//³õÊ¼»¯±í¸ñÊı¾İ
+function initRoles(rolesDiv, roleName) {
+	$("#" + rolesDiv + "").empty();
+	$.ajax({
+		url : "/api/roles",
+		type : "get",
+		contentType: "application/json",
+		success : function (rs) {
+			$("#" + rolesDiv + "").append("<label class='middle'>");
+			$.each(rs, function(i, value) {
+				$("#" + rolesDiv + "").append("<input name='"+ roleName + "' value='" + 
+						value.roleId +"' type='checkbox'>" + value.roleName + "&nbsp;&nbsp;");
+			});
+			$("#" + rolesDiv + "").append("</label>");
+		},
+		error : function (data) {
+			layer.alert(data.responseText, {icon: 0});
+		}
+	});
+}
+
+//åˆå§‹åŒ–è¡¨æ ¼æ•°æ®
 function initTable(currentPage, pageSize){
 	$('#usertable').DataTable({
-		'paging': true, //·ÖÒ³
-		"serverSide": true, //¿ªÆôºó¶Ë·ÖÒ³
-		"pagingType": "full_numbers", //·ÖÒ³ÑùÊ½µÄÀàĞÍsimple/simple_numbers/full/full_numbers
-		"pageLength": pageSize, //¶¨Òå³õÊ¼µÄÒ³³¤
+		'paging': true, //åˆ†é¡µ
+		"serverSide": true, //å¼€å¯åç«¯åˆ†é¡µ
+		"pagingType": "full_numbers",//åˆ†é¡µæ ·å¼çš„ç±»å‹simple/simple_numbers/full/full_numbers
+		"pageLength": pageSize,//å®šä¹‰åˆå§‹çš„é¡µé•¿
 		"processing": true, 
-		"destroy": true, //ÔÊĞíÏú»ÙÌæ»»£¬ÔÚ±í¸ñÖØĞÂ²éÑ¯Ê±£¬¿ÉÒÔ×Ô¶¯Ïú»ÙÒÔÇ°µÄdata
-		'lengthChange': true, //¿ØÖÆÊÇ·ñÄÜ¹»µ÷ÕûÃ¿Ò³µÄÌõÊı
-		'searching': true,//¸øÒ»¸öËÑË÷¿ò¸ù¾İ¹Ø¼ü×Ö²éÑ¯
-		'data-show-refresh': true,//Êı¾İÏÔÊ¾Ê±Ë¢ĞÂ
+		"destroy": true, //å…è®¸é”€æ¯æ›¿æ¢ï¼Œåœ¨è¡¨æ ¼é‡æ–°æŸ¥è¯¢æ—¶ï¼Œå¯ä»¥è‡ªåŠ¨é”€æ¯ä»¥å‰çš„data
+		'lengthChange': true, //æ§åˆ¶æ˜¯å¦èƒ½å¤Ÿè°ƒæ•´æ¯é¡µçš„æ¡æ•°
+		'searching': true,
+		'data-show-refresh': true,
 		'ordering': true,
 		'autoWidth': false,
 		"ajax": function (data, callback, settings) {
-			// ´Ódata»ñÈ¡²éÑ¯Êı¾İ
+			// ä»dataè·å–æŸ¥è¯¢æ•°æ®
 			var columIndex = data.order[0].column;
 			var sort = data.order[0].dir;
 			var orderBy = data.columns[columIndex].name;
@@ -107,7 +128,7 @@ function initTable(currentPage, pageSize){
 						data: []
 					};
 					if (!rs) {
-						layer.alert("ÇëÇó³ö´í£¬ÇëÉÔºóÖØÊÔ" + rs.errmsg, {icon: 2});
+						layer.alert("è¯·æ±‚å‡ºé”™ï¼Œè¯·ç¨åé‡è¯•" + rs.errmsg, {icon: 2});
 						callback(fData);
 						return;
 					};
@@ -120,10 +141,10 @@ function initTable(currentPage, pageSize){
 					$('#loading').remove();
 					var gearDatas = [];
 					for (var i = 0; i < rs.list.length; i++) {
-						//°ü×°ĞĞÊı¾İ
+						//åŒ…è£…è¡Œæ•°æ®
 						var rowData = new TData(rs.list[i].userId, rs.list[i].userName, 
 								rs.list[i].password, rs.list[i].createDate, rs.list[i].email);
-						// ½«ĞĞÊı¾İ·Åµ½Êı×éÀï
+						// å°†è¡Œæ•°æ®æ”¾åˆ°æ•°ç»„é‡Œ
 						gearDatas.push(rowData);
 					}
 					fData.data = gearDatas;
@@ -136,7 +157,7 @@ function initTable(currentPage, pageSize){
 				}
 			});
 		},
-		"columns": [ //¶¨ÒåĞĞÊı¾İ×Ö¶Î
+		"columns": [  //å®šä¹‰è¡Œæ•°æ®å­—æ®µ
 			{data: 'userId', name: "user_id", sortable: true}, 
 			{data: 'userName', name: "user_name", sortable: true}, 
 			{data: 'password', name: "password", sortable: true},
@@ -147,7 +168,7 @@ function initTable(currentPage, pageSize){
 	});
 }
 
-//ĞĞÊı¾İ½á¹¹
+//è¡Œæ•°æ®ç»“æ„
 function TData(userId, userName, password, createDate, email) {
 	this.userId = userId;
 	this.userName = userName;
@@ -156,42 +177,36 @@ function TData(userId, userName, password, createDate, email) {
 	this.email = email;
 	this.operate = function () {
 		return "<a href='#' class='btn_editcolor' data-toggle='modal' " + 
-			"data-target='#userEditModal' onclick='initEditModal(\"" + userId + "\")'>±à¼­</a>&nbsp;" + 
-			"<a href='javascript:void(0);' onclick='deleteUser(\"" + userId + "\")' class='btn_editcolor'>É¾³ı</a>";
+			"data-target='#userEditModal' onclick='initEditModal(\"" + userId + "\")'>ç¼–è¾‘</a>&nbsp;" + 
+			"<a href='javascript:void(0);' onclick='deleteUser(\"" + userId + "\")' class='btn_editcolor'>åˆ é™¤</a>";
 	}
 }
 
-//³õÊ¼»¯Ìí¼ÓÒ³Ãæ
+//åˆå§‹åŒ–æ·»åŠ é¡µé¢
 function initAddModal() {
-	$("#rolesForUserAdd").empty();
-	$.ajax({
-		url : "/api/roles",
-		type : "get",
-		contentType: "application/json",
-		success : function (rs) {
-			$("#rolesForUserAdd").append("<label class='middle'>");
-			$.each(rs, function(i, value) {
-				$("#rolesForUserAdd").append("<input name='roleCheckboxForUserAdd' value='" + 
-						value.roleId +"' class='ace' type='checkbox'>");
-				$("#rolesForUserAdd").append("<span class='lbl'>" + 
-						value.roleName + "</span>&nbsp;");
-			});
-			$("#rolesForUserAdd").append("</label>");
-		},
-		error : function (data) {
-			layer.alert(data.responseText, {icon: 0});
-		}
-	});
+	initRoles("rolesForAddPage", "roleForAddPage");
+	
 	$("#userNameForAddPage").val("");
-	$("#passwordForAddPage").val("");
+	$("#userPassForEditPage").val("");
+	$("#userEmailForEditPage").val("");
 }
 
-// Ìí¼Óuser
+//æ·»åŠ user
 function insertUser() {
 	var user = {};
 	user.userName = $("[name='userName']").val();
 	user.password = $("[name='password']").val();
 	user.email = $("[name='email']").val();
+	
+	var roles = new Array();
+	$.each($("input[name='roleForAddPage']"), function(){
+		if(this.checked){
+			var role = {};
+			role.roleId = $(this).val();
+			roles.push(role);
+		}
+	});
+	user.roles = roles;
 	
 	$.ajax({
 		url : "/api/register",
@@ -211,8 +226,11 @@ function insertUser() {
 	});
 }
 
-// ³õÊ¼»¯±à¼­Ò³Ãæ
+//åˆå§‹åŒ–ç¼–è¾‘é¡µé¢
 function initEditModal(userId) {
+	initRoles("rolesForEditPage", "roleForEditPage");
+	
+	
 	$.ajax({
 		url : "/api/user/" + userId,
 		type : "get",
@@ -220,6 +238,12 @@ function initEditModal(userId) {
 		success : function (rs) {
 			$("#userIdForEditPage").val(rs.userId);
 			$("#userNameForEditPage").val(rs.userName);
+			$("#userPassForEditPage").val(rs.password);
+			$("#userEmailForEditPage").val(rs.email);
+			$.each(rs.roles, function(i, item){
+				$("input[name='roleForEditPage'][value=" + item.roleId + "]")
+					.attr("checked","checked");
+			});
 		},
 		error : function (data) {
 			layer.alert(data.responseText, {icon: 0});
@@ -231,17 +255,29 @@ function updateUser() {
 	var user = {};
 	user.userId = $("#userIdForEditPage").val();
 	user.userName = $("#userNameForEditPage").val();
-
+	user.password = $("#userPassForEditPage").val();
+	user.email = $("#userEmailForEditPage").val();
+	
+	var roles = new Array();
+	$.each($("input[name='roleForEditPage']"), function(){
+		if(this.checked){
+			var role = {};
+			role.roleId = $(this).val();
+			roles.push(role);
+		}
+	});
+	user.roles = roles;
+	
 	$.ajax({
 		url : "/api/user",
 		type : "put",
 		contentType: "application/json",
-		data : JSON.stringify(teacher),
-		success : function (rs) {
-			if (rs.status == 200) {
+		data : JSON.stringify(user),
+		success : function (data) {
+			if (data.status == 200) {
 				initTable(DEFAULT_CURRENT_PAGE, DEFAULT_PAGE_SIZE);
 			} else {
-				layer.alert(rs.message, {icon: 0});
+				layer.alert(data.message, {icon: 0});
 			}
 		},
 		error : function (data) {

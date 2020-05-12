@@ -1,4 +1,4 @@
-<!-- Ä£Ì¬¿ò£¨Modal£© -->
+<!-- æ¨¡æ€æ¡†ï¼ˆModalï¼‰ -->
 <div th:fragment="userAdd" class="modal fade" id="userAddModal" tabindex="-1"
 	role="dialog" aria-labelledby="userAddLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -32,10 +32,14 @@
 								type="text" placeholder="Enter user name">
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3">Roles</label>
+						<div class="col-md-8" id="rolesForAddPage"  ></div>
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<!-- data-dismiss="modal"¹Ø±ÕÄ£Ì¬¿ò -->
+				<!-- data-dismiss="modal"å…³é—­æ¨¡æ€æ¡† -->
 				<a class="reset_pass" href="#" data-dismiss="modal">
 					Cancel
 				</a>
